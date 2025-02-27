@@ -27,6 +27,10 @@ import bell from "./Sounds/RoundEnd/Bell.mp3"
 import set1 from "./Sounds/Sets/Set1.mp3"
 import set2 from "./Sounds/Sets/Set2.mp3"
 import set3 from "./Sounds/Sets/Set3.mp3"
+import set4 from "./Sounds/Sets/Set4.mp3"
+import set5 from "./Sounds/Sets/Set5.mp3"
+import set6 from "./Sounds/Sets/Set6.mp3"
+import set7 from "./Sounds/Sets/Set7.mp3"
 
 
 import finalRound from "./FinalRound.mp3";
@@ -48,7 +52,7 @@ const App: React.FC = () => {
   const isPausedRef = useRef(false);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
   const tracks = [round1, round2, round3, round4, round5, round6, round7, round8, round9];
-  const setSounds = [set2, set3];
+  const setSounds = [set2, set3, set4, set5, set6, set7];
   const roundOver = [bell];
 
   const [rounds, setRounds] = useState<Round[]>([
