@@ -174,20 +174,28 @@ const App: React.FC = () => {
         setPhase("Workout");
   
         await playRoundOrSetSound(roundIndex + 1, setIndex + 1); // Play round or set sound
-
         startCountdown(round.workoutTime);
         await countdown(round.workoutTime);
   
         await playSound(roundOver); // Play round end sound
   
+        // Apply rest time between sets
         if (setIndex < round.sets - 1) {
           setPhase("Rest");
           startCountdown(round.restTime);
           await countdown(round.restTime);
         }
       }
+  
+      // ✅ Apply final rest time **AFTER last set of a round**, before next round
+      if (roundIndex < rounds.length - 1) {
+        setPhase("Rest Before Next Round");
+        startCountdown(round.restTime);
+        await countdown(round.restTime);
+      }
     }
   
+    // Reset workout state
     setIsRunning(false);
     setPhase(null);
     setTimeRemaining(null);
@@ -195,7 +203,6 @@ const App: React.FC = () => {
     setCurrentSet(null);
   };
   
-
   const countdown = (duration: number) => {
     return new Promise<void>((resolve) => {
       let start = Date.now();
