@@ -111,7 +111,7 @@ const App: React.FC = () => {
   const playRoundOrSetSound = async (roundNumber: number, setNumber: number) => {
     if (audioRef.current) {
       let trackToPlay;
-  
+
       if (setNumber === 1) {
         // First set of the round, play round sound
         trackToPlay = tracks[roundNumber - 1] || tracks[0];
@@ -119,7 +119,7 @@ const App: React.FC = () => {
         // Subsequent sets, play set sound
         trackToPlay = setSounds[setNumber - 2] || setSounds[setSounds.length - 1];
       }
-  
+
       audioRef.current.src = trackToPlay;
       audioRef.current.load();
       try {
@@ -168,21 +168,21 @@ const App: React.FC = () => {
     if (isRunning) return;
     setIsRunning(true);
     setIsPaused(false);
-  
+
     for (let roundIndex = 0; roundIndex < rounds.length; roundIndex++) {
       const round = rounds[roundIndex];
-  
+
       for (let setIndex = 0; setIndex < round.sets; setIndex++) {
         setCurrentRound(roundIndex + 1);
         setCurrentSet(setIndex + 1);
         setPhase("Workout");
-  
+
         await playRoundOrSetSound(roundIndex + 1, setIndex + 1); // Play round or set sound
         startCountdown(round.workoutTime);
         await countdown(round.workoutTime);
-  
+
         await playSound(roundOver); // Play round end sound
-  
+
         // Apply rest time between sets
         if (setIndex < round.sets - 1) {
           setPhase("Rest");
@@ -190,7 +190,7 @@ const App: React.FC = () => {
           await countdown(round.restTime);
         }
       }
-  
+
       // ✅ Apply final rest time **AFTER last set of a round**, before next round
       if (roundIndex < rounds.length - 1) {
         setPhase("Rest Before Next Round");
@@ -198,7 +198,7 @@ const App: React.FC = () => {
         await countdown(round.restTime);
       }
     }
-  
+
     // Reset workout state
     setIsRunning(false);
     setPhase(null);
@@ -206,7 +206,7 @@ const App: React.FC = () => {
     setCurrentRound(null);
     setCurrentSet(null);
   };
-  
+
   const countdown = (duration: number) => {
     return new Promise<void>((resolve) => {
       let start = Date.now();
@@ -299,17 +299,20 @@ const App: React.FC = () => {
               <Grid size={{ xs: 4 }}>
                 <TextField label="Sets" type="number" value={round.sets} onChange={(e) =>
                   handleRoundChange(index, "sets", Number(e.target.value))
-                } fullWidth />
+                } fullWidth slotProps={{ input: { inputProps: { min: 0 } } }}
+                />
               </Grid>
               <Grid size={{ xs: 4 }}>
                 <TextField label="Workout (s)" type="number" value={round.workoutTime} onChange={(e) =>
                   handleRoundChange(index, "workoutTime", Number(e.target.value))
-                } fullWidth />
+                } fullWidth slotProps={{ input: { inputProps: { min: 0 } } }}
+                />
               </Grid>
               <Grid size={{ xs: 4 }}>
                 <TextField label="Rest (s)" type="number" value={round.restTime} onChange={(e) =>
                   handleRoundChange(index, "restTime", Number(e.target.value))
-                } fullWidth />
+                } fullWidth slotProps={{ input: { inputProps: { min: 0 } } }}
+                />
               </Grid>
             </Grid>
 
@@ -403,7 +406,7 @@ const App: React.FC = () => {
       </Box>
 
       <audio ref={audioRef} />
-      <AudioPlayer src={Song}/>
+      <AudioPlayer src={Song} />
     </Container>
   );
 };
