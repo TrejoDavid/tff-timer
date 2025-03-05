@@ -21,6 +21,9 @@ import round6 from "./Sounds/RoundStart/Round6.mp3";
 import round7 from "./Sounds/RoundStart/Round7.mp3";
 import round8 from "./Sounds/RoundStart/Round8.mp3";
 import round9 from "./Sounds/RoundStart/Round9.mp3";
+import round10 from "./Sounds/RoundStart/Round10.mp3";
+import round11 from "./Sounds/RoundStart/Round11.mp3";
+import round12 from "./Sounds/RoundStart/Round12.mp3";
 
 import bell from "./Sounds/RoundEnd/Bell.mp3"
 
@@ -51,7 +54,7 @@ const App: React.FC = () => {
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const isPausedRef = useRef(false);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
-  const tracks = [round1, round2, round3, round4, round5, round6, round7, round8, round9];
+  const tracks = [round1, round2, round3, round4, round5, round6, round7, round8, round9, round10, round11, round12];
   const setSounds = [set2, set3, set4, set5, set6, set7];
   const roundOver = [bell];
 
