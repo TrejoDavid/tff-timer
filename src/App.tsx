@@ -81,20 +81,6 @@ const App: React.FC = () => {
     isPausedRef.current = isPaused;
   }, [isPaused]);
 
-
-  const playSetSound = async (roundNumber: number) => {
-    if (audioRef.current) {
-      const trackToPlay = tracks[roundNumber - 1] || tracks[0]; // Default to Round 1 if out of range
-      audioRef.current.src = trackToPlay;
-      audioRef.current.load();
-      try {
-        await audioRef.current.play();
-      } catch (error) {
-        console.error("Set sound playback failed:", error);
-      }
-    }
-  };
-
   const playSound = async (soundList: string[], roundNumber?: number) => {
     if (audioRef.current) {
       // Select the correct round track
@@ -109,7 +95,6 @@ const App: React.FC = () => {
       }
     }
   };
-
 
   const playRoundOrSetSound = async (roundNumber: number, setNumber: number) => {
     if (audioRef.current) {
@@ -142,7 +127,7 @@ const App: React.FC = () => {
   };
 
   const addRound = () => {
-    setRounds([...rounds, { sets: 1, workoutTime: 30, restTime: 15 }]);
+    setRounds([...rounds, { sets: 1, workoutTime: 3, restTime: 3 }]);
   };
 
   const removeRound = (index: number) => {
