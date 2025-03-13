@@ -274,7 +274,7 @@ const App: React.FC = () => {
   return (
     <Container maxWidth="sm">
       <Typography variant="h4" align="center" gutterBottom>
-        Workout Timer
+       TFF Workout Timer
       </Typography>
 
       <Typography variant="h6" align="center" gutterBottom>
