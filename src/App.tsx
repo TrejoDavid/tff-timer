@@ -42,7 +42,7 @@ import impressive from "./assets/Impressive.mp3";
 import outstanding from "./assets/Outstanding.mp3";
 import { CountdownCircleTimer } from "react-countdown-circle-timer";
 import AudioPlayer from "./AudioPlayer";
-import Song from "./Una gatita que le gusta el mambo_ Bellakath - Gatita [Lyrics]. (Gatita bailando).mp3";
+import Song from "./assets/mix.mp3";
 
 interface Round {
   sets: number;
