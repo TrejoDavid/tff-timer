@@ -12,34 +12,34 @@ import {
 import Grid from "@mui/material/Grid2";
 import { Add, Remove, PlayArrow, Pause, Stop, ContentCopy } from "@mui/icons-material";
 
-import round1 from "./Sounds/RoundStart/Round1.mp3";
-import round2 from "./Sounds/RoundStart/Round2.mp3";
-import round3 from "./Sounds/RoundStart/Round3.mp3";
-import round4 from "./Sounds/RoundStart/Round4.mp3";
-import round5 from "./Sounds/RoundStart/Round5.mp3";
-import round6 from "./Sounds/RoundStart/Round6.mp3";
-import round7 from "./Sounds/RoundStart/Round7.mp3";
-import round8 from "./Sounds/RoundStart/Round8.mp3";
-import round9 from "./Sounds/RoundStart/Round9.mp3";
-import round10 from "./Sounds/RoundStart/Round10.mp3";
-import round11 from "./Sounds/RoundStart/Round11.mp3";
-import round12 from "./Sounds/RoundStart/Round12.mp3";
+import round1 from "./assets/Sounds/RoundStart/Round1.mp3";
+import round2 from "./assets/Sounds/RoundStart/Round2.mp3";
+import round3 from "./assets/Sounds/RoundStart/Round3.mp3";
+import round4 from "./assets/Sounds/RoundStart/Round4.mp3";
+import round5 from "./assets/Sounds/RoundStart/Round5.mp3";
+import round6 from "./assets/Sounds/RoundStart/Round6.mp3";
+import round7 from "./assets/Sounds/RoundStart/Round7.mp3";
+import round8 from "./assets/Sounds/RoundStart/Round8.mp3";
+import round9 from "./assets/Sounds/RoundStart/Round9.mp3";
+import round10 from "./assets/Sounds/RoundStart/Round10.mp3";
+import round11 from "./assets/Sounds/RoundStart/Round11.mp3";
+import round12 from "./assets/Sounds/RoundStart/Round12.mp3";
 
-import bell from "./Sounds/RoundEnd/Bell.mp3"
+import bell from "./assets/Sounds/RoundEnd/Bell.mp3"
 
-import set1 from "./Sounds/Sets/Set1.mp3"
-import set2 from "./Sounds/Sets/Set2.mp3"
-import set3 from "./Sounds/Sets/Set3.mp3"
-import set4 from "./Sounds/Sets/Set4.mp3"
-import set5 from "./Sounds/Sets/Set5.mp3"
-import set6 from "./Sounds/Sets/Set6.mp3"
-import set7 from "./Sounds/Sets/Set7.mp3"
+import set1 from "./assets/Sounds/Sets/Set1.mp3"
+import set2 from "./assets/Sounds/Sets/Set2.mp3"
+import set3 from "./assets/Sounds/Sets/Set3.mp3"
+import set4 from "./assets/Sounds/Sets/Set4.mp3"
+import set5 from "./assets/Sounds/Sets/Set5.mp3"
+import set6 from "./assets/Sounds/Sets/Set6.mp3"
+import set7 from "./assets/Sounds/Sets/Set7.mp3"
 
 
-import finalRound from "./FinalRound.mp3";
-import excellent from "./Excellent.mp3";
-import impressive from "./Impressive.mp3";
-import outstanding from "./Outstanding.mp3";
+import finalRound from "./assets/FinalRound.mp3";
+import excellent from "./assets/Excellent.mp3";
+import impressive from "./assets/Impressive.mp3";
+import outstanding from "./assets/Outstanding.mp3";
 import { CountdownCircleTimer } from "react-countdown-circle-timer";
 import AudioPlayer from "./AudioPlayer";
 import Song from "./Una gatita que le gusta el mambo_ Bellakath - Gatita [Lyrics]. (Gatita bailando).mp3";
