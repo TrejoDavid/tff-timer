@@ -156,45 +156,53 @@ const App: React.FC = () => {
     if (isRunning) return;
     setIsRunning(true);
     setIsPaused(false);
-
+  
     for (let roundIndex = 0; roundIndex < rounds.length; roundIndex++) {
       const round = rounds[roundIndex];
-
+  
       for (let setIndex = 0; setIndex < round.sets; setIndex++) {
         setCurrentRound(roundIndex + 1);
         setCurrentSet(setIndex + 1);
         setPhase("Workout");
-
-        await playRoundOrSetSound(roundIndex + 1, setIndex + 1); // Play round or set sound
+  
+        await playRoundOrSetSound(roundIndex + 1, setIndex + 1);
         startCountdown(round.workoutTime);
         await countdown(round.workoutTime);
-
-        await playSound(roundOver); // Play round end sound
-
-        // Apply rest time between sets
+  
+        if (isPausedRef.current) {
+          await new Promise(resolve => {
+            const checkPaused = setInterval(() => {
+              if (!isPausedRef.current) {
+                clearInterval(checkPaused);
+                resolve(null);
+              }
+            }, 100);
+          });
+        }
+  
+        await playSound(roundOver);
+  
         if (setIndex < round.sets - 1) {
           setPhase("Rest");
           startCountdown(round.restTime);
           await countdown(round.restTime);
         }
       }
-
-      // ✅ Apply final rest time **AFTER last set of a round**, before next round
+  
       if (roundIndex < rounds.length - 1) {
         setPhase("Rest Before Next Round");
         startCountdown(round.restTime);
         await countdown(round.restTime);
       }
     }
-
-    // Reset workout state
+  
     setIsRunning(false);
     setPhase(null);
     setTimeRemaining(null);
     setCurrentRound(null);
     setCurrentSet(null);
   };
-
+  
   const countdown = (duration: number) => {
     return new Promise<void>((resolve) => {
       let start = Date.now();
@@ -348,8 +356,20 @@ const App: React.FC = () => {
 
               if (phase === "Workout") {
                 setPhase("Rest");
-                startCountdown(rounds[currentRound! - 1].restTime);
-                countdown(rounds[currentRound! - 1].restTime);
+                const restTime = rounds[currentRound! - 1].restTime;
+                startCountdown(restTime);
+                countdown(restTime).then(() => {
+                  setCurrentSet((prev) => {
+                    if (prev! < rounds[currentRound! - 1].sets) {
+                      setPhase("Workout");
+                      startCountdown(rounds[currentRound! - 1].workoutTime);
+                      countdown(rounds[currentRound! - 1].workoutTime);
+                      return prev! + 1;
+                    } else {
+                      return prev; // Stay at last set
+                    }
+                  });
+                });
               } else if (phase === "Rest") {
                 setCurrentSet((prev) => {
                   if (prev! < rounds[currentRound! - 1].sets) {
@@ -358,13 +378,14 @@ const App: React.FC = () => {
                     countdown(rounds[currentRound! - 1].workoutTime);
                     return prev! + 1;
                   } else {
-                    return prev; // Stay at last set
+                    return prev;
                   }
                 });
               }
-
+            
               return { shouldRepeat: false };
             }}
+            
           >
             {({ remainingTime }) => (
               <Typography variant="h5" sx={{ fontWeight: "bold" }}>
